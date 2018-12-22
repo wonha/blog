@@ -1,7 +1,8 @@
 ---
 title: "Anatomy of CompletableFuture"
 date: 2018-12-22T20:42:24+09:00
-draft: true
+draft: false
+tags: [Java, Async, Multithreading, CompletableFuture]
 ---
 
 # Asynchronous Computation with CompletableFuture

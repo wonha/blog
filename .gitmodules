@@ -8,3 +8,15 @@
 	path = public
 	url = https://github.com/wonha/wonha.github.io.git
 	branch = master
+[submodule "theme/tikva"]
+	path = theme/tikva
+	url = https://github.com/geschke/hugo-tikva.git
+[submodule "hugo-tikva"]
+	path = hugo-tikva
+	url = https://github.com/geschke/hugo-tikva.git
+[submodule "hyde-y"]
+	path = hyde-y
+	url = https://github.com/enten/hyde-y.git
+[submodule "purehugo"]
+	path = purehugo
+	url = https://github.com/dplesca/purehugo.git
