@@ -61,24 +61,24 @@ By using this deque and Work Stealing Algorithm, Fork/Join Pool framework allows
 # Spring
 
 1. ThreadPoolTaskExecutor 
-```
-> Executor -- java.util.concurrent
-    > TaskExecutor -- org.springframework.core.task
-        > AsyncTaskExecutor
-            > SchedulingTaskExecutor
+    ```
+    > Executor -- java.util.concurrent
+        > TaskExecutor -- org.springframework.core.task
+            > AsyncTaskExecutor
+                > SchedulingTaskExecutor
+                    > ThreadPoolTaskExecutor
+
+    > ThreadFactory -- java.util.concurrent
+    > CustomizableThreadCreator -- org.springframework.scheduling ...
+        > CustomizableThreadFactory
+            > ExecutorConfigurationSupport
                 > ThreadPoolTaskExecutor
 
-> ThreadFactory -- java.util.concurrent
-> CustomizableThreadCreator -- org.springframework.scheduling ...
-    > CustomizableThreadFactory
-        > ExecutorConfigurationSupport
-            > ThreadPoolTaskExecutor
 
-
-> Executor -- java.util.concurrent
-    > TaskExecutor -- org.springframework.core.task
-        > AsyncTaskExecutor
-            > AsyncListenableTaskExecutor
-                > ThreadPoolTaskExecutor
-```
+    > Executor -- java.util.concurrent
+        > TaskExecutor -- org.springframework.core.task
+            > AsyncTaskExecutor
+                > AsyncListenableTaskExecutor
+                    > ThreadPoolTaskExecutor
+    ```
 

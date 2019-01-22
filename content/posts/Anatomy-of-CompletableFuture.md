@@ -9,6 +9,7 @@ tags: [Java, Async, Multithreading, CompletableFuture]
 
 ## Without utility methods
 ```java
+ 
 public Future<String> boilerPlateFuture() throws InterruptedException {
     CompletableFuture<String> completableFuture
             = new CompletableFuture<>();
@@ -25,6 +26,7 @@ public Future<String> boilerPlateFuture() throws InterruptedException {
 
 ## Supply, Apply and Accept
 ```java
+ 
 Future<Void> future = CompletableFuture.supplyAsync(() -> {
     try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); }
     log.info("do supplyAsync");
@@ -41,7 +43,8 @@ Future<Void> future = CompletableFuture.supplyAsync(() -> {
 
 log.info("do main");
 ```
-```
+```plain
+ 
 10:33:41.1 [main] - do main
 10:33:42.1 [ForkJoinPool.commonPool-worker-1] - do supplyAsync
 10:33:43.1 [ForkJoinPool.commonPool-worker-1] - do thenApply
@@ -54,6 +57,7 @@ log.info("do main");
 ## Supply and Compose
 
 ```java
+ 
 Future<Void> future = CompletableFuture.supplyAsync(() -> {
     try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); }
     log.info("do supplyAsync");
@@ -78,6 +82,7 @@ Future<Void> future = CompletableFuture.supplyAsync(() -> {
 log.info("do main");
 ```
 ```
+ 
 10:55:06.6 [main] - do main
 10:55:07.6 [ForkJoinPool.commonPool-worker-1] - do supplyAsync
 10:55:08.6 [ForkJoinPool.commonPool-worker-1] - do thenCompose
@@ -93,6 +98,7 @@ The difference between `thenApply()` and `thenCompose()` :
 
 `thenCompose()` is useful when assembling modularized code :  
 ```java
+ 
 CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> 1);
 CompletableFuture<Double> future2 = CompletableFuture.supplyAsync(() -> 1.0);
 
@@ -106,6 +112,7 @@ Future of `thenCombine` works in parallel.
 ## Supply and Combine
 
 ```java
+ 
 Future<Void> future = CompletableFuture.supplyAsync(() -> {
     try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); }
     log.info("do supplyAsync");
@@ -130,6 +137,7 @@ Future<Void> future = CompletableFuture.supplyAsync(() -> {
 log.info("do main");
 ```
 ```
+ 
 10:51:32.5 [main] - do main
 10:51:33.5 [ForkJoinPool.commonPool-worker-1] - do supplyAsync
 10:51:33.5 [ForkJoinPool.commonPool-worker-2] - do supplyAsync
@@ -141,6 +149,7 @@ log.info("do main");
 ## Accept Both
 `thenAcceptBoth()` is similar to `thenCombine().thenAccept()`
 ```java
+ 
 Future<Void> future = CompletableFuture.supplyAsync(() -> {
     try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); }
     log.info("do supplyAsync");
@@ -161,6 +170,7 @@ Future<Void> future = CompletableFuture.supplyAsync(() -> {
 log.info("do main");
 ```
 ```
+ 
 11:01:16.8 [main] - do main
 11:01:17.8 [ForkJoinPool.commonPool-worker-2] - do supplyAsync
 11:01:17.8 [ForkJoinPool.commonPool-worker-1] - do supplyAsync
@@ -171,6 +181,7 @@ log.info("do main");
 
 ## Multiple Futures
 ```java
+ 
 CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> {
     log.info("future1");
     return 1;
@@ -197,6 +208,7 @@ CompletableFuture.allOf(listOfFuture.toArray(new CompletableFuture[listOfFuture.
         }).join();
 ```
 ```
+ 
 12:45:08.7 [ForkJoinPool.commonPool-worker-1] - future1
 12:45:08.7 [ForkJoinPool.commonPool-worker-3] - future3
 12:45:08.7 [ForkJoinPool.commonPool-worker-2] - future2
@@ -208,16 +220,18 @@ CompletableFuture.allOf(listOfFuture.toArray(new CompletableFuture[listOfFuture.
 
 > get() throws checked exception when future completed exceptionally, however join() throws unchecked exception.  
 >Due to this, join() is good to use with stream.  
->```java
->String combined = Stream.of(future1, future2, future3)
->  .map(CompletableFuture::join)
->  .collect(Collectors.joining(" "));
->```
+```java
+String combined = Stream.of(future1, future2, future3)
+  .map(CompletableFuture::join)
+  .collect(Collectors.joining(" "));
+```   
+   
 
 # Exception Handling
 ## handle
 `handler()` is `thenApply()` + exception handler.  
 ```java
+ 
 String name = null;
 Future<Void> future = CompletableFuture.supplyAsync(() -> {
     try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -240,6 +254,7 @@ log.info("do main");
 ## exceptionally
 `exceptionally()` provides fallback value when the Future has completed exceptionally.  
 ```java
+ 
 Future<Integer> future = CompletableFuture.supplyAsync(() -> {
     int val = 1;
     log.info("do supplyAsync");
@@ -256,11 +271,13 @@ Future<Integer> future = CompletableFuture.supplyAsync(() -> {
 log.info("result : {}", future.get());
 ```
 ```
+ 
 12:28:07.8 [ForkJoinPool.commonPool-worker-1] - do supplyAsync
 12:28:07.8 [ForkJoinPool.commonPool-worker-1] - do thenApply 1
 12:28:07.8 [main] - result : 100
 ```
 ```java
+ 
 Future<Integer> future = CompletableFuture.supplyAsync(() -> {
     int val = 1;
     log.info("do supplyAsync");
@@ -277,6 +294,7 @@ Future<Integer> future = CompletableFuture.supplyAsync(() -> {
 log.info("result : {}", future.get());
 ```
 ```
+ 
 12:29:00.5 [ForkJoinPool.commonPool-worker-1] - do supplyAsync
 12:29:00.5 [ForkJoinPool.commonPool-worker-1] - do thenApply 1
 12:29:00.5 [ForkJoinPool.commonPool-worker-1] - do thenApply 2
@@ -284,6 +302,7 @@ log.info("result : {}", future.get());
 ```
 However it does not handle exception fot those which occured after the chaining.  
 ```java
+ 
 Future<Integer> future = CompletableFuture.supplyAsync(() -> {
     int val = 1;
     log.info("do supplyAsync");
@@ -301,6 +320,7 @@ Future<Integer> future = CompletableFuture.supplyAsync(() -> {
 log.info("result : {}", future.get());
 ```
 ```
+ 
 12:30:01.183 [ForkJoinPool.commonPool-worker-1] INFO rakuten.travel.reservation.steps.StepsApplication - do supplyAsync
 12:30:01.187 [ForkJoinPool.commonPool-worker-1] INFO rakuten.travel.reservation.steps.StepsApplication - do thenApply 1
 12:30:01.187 [ForkJoinPool.commonPool-worker-1] INFO rakuten.travel.reservation.steps.StepsApplication - do thenApply 2
@@ -312,6 +332,7 @@ Caused by: java.lang.RuntimeException
 
 ## completeExceptionally
 ```java
+ 
 CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
     try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); }
     log.info("do supplyAsync");
