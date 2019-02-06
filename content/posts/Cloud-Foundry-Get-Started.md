@@ -49,4 +49,15 @@ cf map-route hello-world2 hello-wonha.dev.wonha.net -n hello-world
 cf push my-docer-app -d dev.wonha.net --docker-image httpd
 ```
 
+## General
+```
+cf restart APP_NAME
+cf logs APP_NAME --recent
+cf app APP_NAME
+cf bind --help
+cf service --help
+cf bind-service --help
+cf bind-service APP_NAME SERVICE_NAME
+cf restage APP_NAME
+```
 
