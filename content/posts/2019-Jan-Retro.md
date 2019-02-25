@@ -12,7 +12,3 @@ Streaming Data
 # Half Read
 빠르게 훑어보는 구글 클라우드 플랫폼 (Google Cloud Platform)
     - I can quicly read the last part when it is necessary
-
-
-
-
