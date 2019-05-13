@@ -1,5 +1,5 @@
 ---
-title: "Clound Foundry Get Started"
+title: "Cloud Foundry Get Started"
 date: 2018-12-22T22:26:58+09:00
 draft: false
 tags: [PaaS, Clound Foundry]
